@@ -1,0 +1,54 @@
+plugins {
+  id "com.jfrog.bintray" version "1.0"
+}
+  
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'com.lookout'
+version = '1.0.0'
+
+if (System.env.RELEASE != '1') {
+    version = "${version}-SNAPSHOT"
+}
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
+
+repositories {
+    mavenCentral()
+
+    // Storm jars are in clojars instead of maven central or jcenter
+    maven {
+        url 'http://clojars.org/repo'
+    }
+}
+
+dependencies {
+    compile 'org.apache.storm:storm-core:0.9.2-incubating'
+    compile 'com.timgroup:java-statsd-client:2.0.+'
+
+    testCompile 'junit:junit:3.8.+'
+    testCompile 'org.easymock:easymock:3.2'
+}
+
+bintray {
+    user = bintrayUser
+    key = bintrayKey
+    publish = true
+    dryRun = false
+    configurations = ['archives']
+
+    pkg {
+        userOrg = 'lookout'
+        repo = 'systems'
+        name = 'storm-metrics-statsd'
+        labels = ['storm', 'java', 'statsd']
+
+        version {
+            name = project.version
+            vcsTag = "v${project.version}"
+            desc = 'A Lookout build of the storm-statsd library'
+        }
+    }
+}
