@@ -1,12 +1,21 @@
 # Storm Metrics Statsd
 
+[ ![Download](https://api.bintray.com/packages/lookout/systems/storm-metrics-statsd/images/download.svg) ](https://bintray.com/lookout/systems/storm-metrics-statsd/_latestVersion)
+
 storm-metrics-statsd is a module for [Storm](http://storm-project.net/) that enables metrics collection and reporting to [statsd](https://github.com/etsy/statsd/).
 
-## Building/Installation
 
-    git clone https://github.com/endgameinc/storm-metrics-statsd.git
+## Installation
+
+1. Add the Maven repository: `http://dl.bintray.com/lookout/systems`
+1. (Gradle) `compile 'com.lookout:storm-metrics-statsd:1.0.0`
+
+
+## Building
+
+    git clone https://github.com/lookout/storm-metrics-statsd.git
     cd storm-metrics-statsd
-    mvn compile package install
+    ./gradlew test jar
 
 ## Usage
 
